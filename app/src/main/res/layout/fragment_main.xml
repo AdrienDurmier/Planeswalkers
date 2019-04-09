@@ -40,7 +40,7 @@
             android:textColor="#FFF"
             android:textStyle="bold"
             android:padding="15dip"
-            android:text="GET DATAS FROM GITHUB"/>
+            android:text="GET DATAS FROM SCRYFALL"/>
 
     </LinearLayout>
 
