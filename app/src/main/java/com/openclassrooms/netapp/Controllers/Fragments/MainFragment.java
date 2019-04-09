@@ -2,15 +2,20 @@ package com.openclassrooms.netapp.Controllers.Fragments;
 
 
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.openclassrooms.netapp.Controllers.Models.MTGSet;
 import com.openclassrooms.netapp.Controllers.Utils.MyHttpURLConnection;
 import com.openclassrooms.netapp.Controllers.Utils.NetworkAsyncTask;
+import com.openclassrooms.netapp.Controllers.Utils.ScryfallCalls;
 import com.openclassrooms.netapp.R;
+
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -19,7 +24,7 @@ import butterknife.OnClick;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class MainFragment extends Fragment implements NetworkAsyncTask.Listeners {
+public class MainFragment extends Fragment implements NetworkAsyncTask.Listeners, ScryfallCalls.Callbacks {
 
     // FOR DESIGN
     @BindView(R.id.fragment_main_textview) TextView textView;
@@ -46,8 +51,23 @@ public class MainFragment extends Fragment implements NetworkAsyncTask.Listeners
     // HTTP REQUEST
     // -----------------
 
+    private void executeHttpRequestWithRetrofit(){
+        this.updateUIWhenStartingHTTPRequest();
+        ScryfallCalls.fetchSets(this);
+    }
+
+    @Override
+    public void onResponse(@Nullable List<MTGSet> sets){
+        if(sets != null) this.updateUIWithListOfSets(sets);
+    }
+
+    @Override
+    public void onFailure(){
+        this.updateUIWhenStopingHTTPRequest("Oh oh! On dirait qu'il y a un problème");
+    }
+
     private void executeHttpRequest(){
-        new NetworkAsyncTask(this).execute("https://api.scryfall.com/catalog/card-names ");
+        new NetworkAsyncTask(this).execute("https://api.scryfall.com/sets");
     }
 
     @Override
@@ -74,6 +94,14 @@ public class MainFragment extends Fragment implements NetworkAsyncTask.Listeners
 
     private void updateUIWhenStopingHTTPRequest(String response){
         this.textView.setText(response);
+    }
+
+    private void updateUIWithListOfSets(List<MTGSet> sets){
+        StringBuilder stringBuilder = new StringBuilder();
+        for(MTGSet set : sets){
+            stringBuilder.append("-" + set.getData() + "\n"); // <- getData() ????????????????????????????????
+        }
+        updateUIWhenStopingHTTPRequest(stringBuilder.toString());
     }
 
 }
