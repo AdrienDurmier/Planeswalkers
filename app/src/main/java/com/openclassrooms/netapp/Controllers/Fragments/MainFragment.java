@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.bumptech.glide.Glide;
 import com.openclassrooms.netapp.Controllers.Models.MTGCard;
 import com.openclassrooms.netapp.Controllers.Models.MTGCardList;
 import com.openclassrooms.netapp.Controllers.Utils.ScryfallStreams;
@@ -59,7 +60,7 @@ public class MainFragment extends Fragment {
 
     private void configureRecyclerView(){
         this.mtgCards = new ArrayList<>();
-        this.adapter = new MTGCardAdapter(this.mtgCards);
+        this.adapter = new MTGCardAdapter(this.mtgCards, Glide.with(this));
         this.recyclerView.setAdapter(this.adapter);
         this.recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
     }

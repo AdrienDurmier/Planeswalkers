@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.bumptech.glide.RequestManager;
 import com.openclassrooms.netapp.Controllers.Models.MTGCard;
 import com.openclassrooms.netapp.R;
 
@@ -13,12 +14,12 @@ import java.util.List;
 
 public class MTGCardAdapter extends RecyclerView.Adapter<MTGCardViewHolder> {
 
-        // FOR DATA
         private List<MTGCard> mtgCards;
+        private RequestManager glide;
 
-        // CONSTRUCTOR
-        public MTGCardAdapter(List<MTGCard> MTGCards) {
+        public MTGCardAdapter(List<MTGCard> MTGCards, RequestManager glide) {
             this.mtgCards = MTGCards;
+            this.glide = glide;
         }
 
         @Override
@@ -30,13 +31,11 @@ public class MTGCardAdapter extends RecyclerView.Adapter<MTGCardViewHolder> {
             return new MTGCardViewHolder(view);
         }
 
-        // UPDATE VIEW HOLDER WITH A MTGCard
         @Override
         public void onBindViewHolder(MTGCardViewHolder viewHolder, int position) {
-            viewHolder.updateWithMTGCard(this.mtgCards.get(position));
+            viewHolder.updateWithMTGCard(this.mtgCards.get(position), this.glide);
         }
 
-        // RETURN THE TOTAL COUNT OF ITEMS IN THE LIST
         @Override
         public int getItemCount() {
             return this.mtgCards.size();
