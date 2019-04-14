@@ -1,6 +1,7 @@
 package com.openclassrooms.netapp.Controllers.Utils;
 
 import com.openclassrooms.netapp.Controllers.Models.MTGSet;
+import com.openclassrooms.netapp.Controllers.Models.MTGSetList;
 
 import java.util.List;
 
@@ -19,7 +20,7 @@ public interface ScryfallService {
      * @return
      */
     @GET("sets")
-    Observable<List<MTGSet>> getMTGSets();
+    Observable<MTGSetList> getListMTGSet();
 
     /**
      * Retourne un set à partir de son code

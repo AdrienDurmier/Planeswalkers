@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.openclassrooms.netapp.Controllers.Models.MTGSet;
+import com.openclassrooms.netapp.Controllers.Models.MTGSetList;
 import com.openclassrooms.netapp.Controllers.Utils.ScryfallStreams;
 import com.openclassrooms.netapp.R;
 
@@ -54,14 +55,35 @@ public class MainFragment extends Fragment {
     @OnClick(R.id.fragment_main_button)
     public void submit(View view) {
         // 2 - Call the stream
-        this.executeHttpRequestWithRetrofit();
+        this.executeHttpRequestGetListOfMTGSets();
     }
 
     // -------------------
     // HTTP (RxJAVA)
     // -------------------
 
-    private void executeHttpRequestWithRetrofit(){
+    private void executeHttpRequestGetListOfMTGSets(){
+        this.updateUIWhenStartingHTTPRequest();
+        this.disposable = ScryfallStreams.streamFetchListMTGSet().subscribeWith(new DisposableObserver<MTGSetList>() {
+            @Override
+            public void onNext(MTGSetList mtgSetList) {
+                Log.e("TAG","On Next");
+                updateUIWithListOfMtgSet(mtgSetList);
+            }
+
+            @Override
+            public void onError(Throwable e) {
+                Log.e("TAG","On Error"+Log.getStackTraceString(e));
+            }
+
+            @Override
+            public void onComplete() {
+                Log.e("TAG","On Complete !!");
+            }
+        });
+    }
+
+    private void executeHttpRequestGetOfMTGSet(){
         this.updateUIWhenStartingHTTPRequest();
         this.disposable = ScryfallStreams.streamFetchMTGSet("c19").subscribeWith(new DisposableObserver<MTGSet>() {
             @Override
@@ -96,6 +118,14 @@ public class MainFragment extends Fragment {
 
     private void updateUIWhenStopingHTTPRequest(String response){
         this.textView.setText(response);
+    }
+
+    private void updateUIWithListOfMtgSet(MTGSetList mtgSetList){
+        StringBuilder stringBuilder = new StringBuilder();
+        for (MTGSet mtgSet : mtgSetList.getData()){
+            stringBuilder.append(" - " + mtgSet.getName() + "\n");
+        }
+        updateUIWhenStopingHTTPRequest(stringBuilder.toString());
     }
 
     private void updateUIWithMtgSet(MTGSet mtgSet){
