@@ -9,6 +9,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.openclassrooms.netapp.Controllers.Models.MTGCard;
+import com.openclassrooms.netapp.Controllers.Models.MTGCardList;
 import com.openclassrooms.netapp.Controllers.Models.MTGSet;
 import com.openclassrooms.netapp.Controllers.Models.MTGSetList;
 import com.openclassrooms.netapp.Controllers.Utils.ScryfallStreams;
@@ -55,14 +57,14 @@ public class MainFragment extends Fragment {
     @OnClick(R.id.fragment_main_button)
     public void submit(View view) {
         // 2 - Call the stream
-        this.executeHttpRequestGetListOfMTGSets();
+        this.executeHttpRequestGetListOfMTGCard();
     }
 
     // -------------------
     // HTTP (RxJAVA)
     // -------------------
 
-    private void executeHttpRequestGetListOfMTGSets(){
+    private void executeHttpRequestGetListOfMTGSet(){
         this.updateUIWhenStartingHTTPRequest();
         this.disposable = ScryfallStreams.streamFetchListMTGSet().subscribeWith(new DisposableObserver<MTGSetList>() {
             @Override
@@ -104,6 +106,28 @@ public class MainFragment extends Fragment {
         });
     }
 
+    private void executeHttpRequestGetListOfMTGCard(){
+        this.updateUIWhenStartingHTTPRequest();
+        this.disposable = ScryfallStreams.streamFetchListMTGCard().subscribeWith(new DisposableObserver<MTGCardList>() {
+            @Override
+            public void onNext(MTGCardList mtgCardList) {
+                Log.e("TAG","On Next");
+                updateUIWithListOfMtgCard(mtgCardList);
+            }
+
+            @Override
+            public void onError(Throwable e) {
+                Log.e("TAG","On Error"+Log.getStackTraceString(e));
+            }
+
+            @Override
+            public void onComplete() {
+                Log.e("TAG","On Complete !!");
+            }
+        });
+    }
+
+
     private void disposeWhenDestroy(){
         if (this.disposable != null && !this.disposable.isDisposed()) this.disposable.dispose();
     }
@@ -130,5 +154,13 @@ public class MainFragment extends Fragment {
 
     private void updateUIWithMtgSet(MTGSet mtgSet){
         updateUIWhenStopingHTTPRequest("Le Set est " + mtgSet.getName()+" du bloc " + mtgSet.getBlock()+".");
+    }
+
+    private void updateUIWithListOfMtgCard(MTGCardList mtgCardList){
+        StringBuilder stringBuilder = new StringBuilder();
+        for (MTGCard mtgCard : mtgCardList.getData()){
+            stringBuilder.append(" - " + mtgCard.getName() + " " + mtgCard.getManaCost() + "\n");
+        }
+        updateUIWhenStopingHTTPRequest(stringBuilder.toString());
     }
 }

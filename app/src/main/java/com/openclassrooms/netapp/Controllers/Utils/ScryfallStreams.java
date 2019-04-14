@@ -1,5 +1,6 @@
 package com.openclassrooms.netapp.Controllers.Utils;
 
+import com.openclassrooms.netapp.Controllers.Models.MTGCardList;
 import com.openclassrooms.netapp.Controllers.Models.MTGSet;
 import com.openclassrooms.netapp.Controllers.Models.MTGSetList;
 
@@ -16,8 +17,8 @@ public class ScryfallStreams {
     public static Observable<MTGSetList> streamFetchListMTGSet(){
         ScryfallService scryfallService = ScryfallService.retrofit.create(ScryfallService.class);
         return scryfallService.getListMTGSet()
-                .subscribeOn(Schedulers.io()) // opérateur pour executer l'observable dans un thread dédié
-                .observeOn(AndroidSchedulers.mainThread()) // permet à tous les subscribers d'écouter le flux de données sur le thread principal
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
                 .timeout(30, TimeUnit.SECONDS);
     }
 
@@ -29,20 +30,12 @@ public class ScryfallStreams {
                 .timeout(10, TimeUnit.SECONDS);
     }
 
-    /*public static Observable<GithubUserInfo> streamFetchUserFollowingAndFetchFirstUserInfos(String username){
-        return streamFetchUserFollowing(username) // A.
-                .map(new Function<List<GithubUser>, GithubUser>() {
-                    @Override
-                    public GithubUser apply(List<GithubUser> users) throws Exception {
-                        return users.get(0); // B.
-                    }
-                })
-                .flatMap(new Function<GithubUser, Observable<GithubUserInfo>>() {
-                    @Override
-                    public Observable<GithubUserInfo> apply(GithubUser user) throws Exception {
-                        // C.
-                        return streamFetchUserInfos(user.getLogin());
-                    }
-                });
-    }*/
+    public static Observable<MTGCardList> streamFetchListMTGCard(){
+        ScryfallService scryfallService = ScryfallService.retrofit.create(ScryfallService.class);
+        return scryfallService.getListMTGCard()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .timeout(30, TimeUnit.SECONDS);
+    }
+
 }

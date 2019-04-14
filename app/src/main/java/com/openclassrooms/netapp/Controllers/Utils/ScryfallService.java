@@ -2,6 +2,8 @@ package com.openclassrooms.netapp.Controllers.Utils;
 
 import com.openclassrooms.netapp.Controllers.Models.MTGSet;
 import com.openclassrooms.netapp.Controllers.Models.MTGSetList;
+import com.openclassrooms.netapp.Controllers.Models.MTGCard;
+import com.openclassrooms.netapp.Controllers.Models.MTGCardList;
 
 import java.util.List;
 
@@ -30,6 +32,14 @@ public interface ScryfallService {
      */
     @GET("/sets/{code}")
     Observable<MTGSet> getMTGSet(@Path("code") String code);
+
+    /**
+     * Retourne la liste des cards
+     * @see https://scryfall.com/docs/api/cards
+     * @return
+     */
+    @GET("/cards")
+    Observable<MTGCardList> getListMTGCard();
 
     public static final Retrofit retrofit = new Retrofit.Builder()
             .baseUrl("https://api.scryfall.com/")
