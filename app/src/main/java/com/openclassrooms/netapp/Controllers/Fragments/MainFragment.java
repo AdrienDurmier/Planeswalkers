@@ -3,24 +3,23 @@ package com.openclassrooms.netapp.Controllers.Fragments;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.Log;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import com.openclassrooms.netapp.Controllers.Models.MTGCard;
 import com.openclassrooms.netapp.Controllers.Models.MTGCardList;
-import com.openclassrooms.netapp.Controllers.Models.MTGSet;
-import com.openclassrooms.netapp.Controllers.Models.MTGSetList;
 import com.openclassrooms.netapp.Controllers.Utils.ScryfallStreams;
+import com.openclassrooms.netapp.Controllers.Views.MTGCardAdapter;
 import com.openclassrooms.netapp.R;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.observers.DisposableObserver;
 
@@ -30,10 +29,12 @@ import io.reactivex.observers.DisposableObserver;
 public class MainFragment extends Fragment {
 
     // FOR DESIGN
-    @BindView(R.id.fragment_main_textview) TextView textView;
+    @BindView(R.id.fragment_main_recycler_view) RecyclerView recyclerView;
 
     //FOR DATA
     private Disposable disposable;
+    private List<MTGCard> mtgCards;
+    private MTGCardAdapter adapter;
 
     public MainFragment() { }
 
@@ -41,6 +42,8 @@ public class MainFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_main, container, false);
         ButterKnife.bind(this, view);
+        this.configureRecyclerView();
+        this.executeHttpRequestWithRetrofit();
         return view;
     }
 
@@ -51,82 +54,34 @@ public class MainFragment extends Fragment {
     }
 
     // -----------------
-    // ACTIONS
+    // CONFIGURATION
     // -----------------
 
-    @OnClick(R.id.fragment_main_button)
-    public void submit(View view) {
-        // 2 - Call the stream
-        this.executeHttpRequestGetListOfMTGCard();
+    private void configureRecyclerView(){
+        this.mtgCards = new ArrayList<>();
+        this.adapter = new MTGCardAdapter(this.mtgCards);
+        this.recyclerView.setAdapter(this.adapter);
+        this.recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
     }
 
     // -------------------
     // HTTP (RxJAVA)
     // -------------------
 
-    private void executeHttpRequestGetListOfMTGSet(){
-        this.updateUIWhenStartingHTTPRequest();
-        this.disposable = ScryfallStreams.streamFetchListMTGSet().subscribeWith(new DisposableObserver<MTGSetList>() {
-            @Override
-            public void onNext(MTGSetList mtgSetList) {
-                Log.e("TAG","On Next");
-                updateUIWithListOfMtgSet(mtgSetList);
-            }
-
-            @Override
-            public void onError(Throwable e) {
-                Log.e("TAG","On Error"+Log.getStackTraceString(e));
-            }
-
-            @Override
-            public void onComplete() {
-                Log.e("TAG","On Complete !!");
-            }
-        });
-    }
-
-    private void executeHttpRequestGetOfMTGSet(){
-        this.updateUIWhenStartingHTTPRequest();
-        this.disposable = ScryfallStreams.streamFetchMTGSet("c19").subscribeWith(new DisposableObserver<MTGSet>() {
-            @Override
-            public void onNext(MTGSet set) {
-                Log.e("TAG","On Next");
-                updateUIWithMtgSet(set);
-            }
-
-            @Override
-            public void onError(Throwable e) {
-                Log.e("TAG","On Error"+Log.getStackTraceString(e));
-            }
-
-            @Override
-            public void onComplete() {
-                Log.e("TAG","On Complete !!");
-            }
-        });
-    }
-
-    private void executeHttpRequestGetListOfMTGCard(){
-        this.updateUIWhenStartingHTTPRequest();
+    private void executeHttpRequestWithRetrofit(){
         this.disposable = ScryfallStreams.streamFetchListMTGCard().subscribeWith(new DisposableObserver<MTGCardList>() {
             @Override
             public void onNext(MTGCardList mtgCardList) {
-                Log.e("TAG","On Next");
-                updateUIWithListOfMtgCard(mtgCardList);
+                updateUI(mtgCardList);
             }
 
             @Override
-            public void onError(Throwable e) {
-                Log.e("TAG","On Error"+Log.getStackTraceString(e));
-            }
+            public void onError(Throwable e) { }
 
             @Override
-            public void onComplete() {
-                Log.e("TAG","On Complete !!");
-            }
+            public void onComplete() { }
         });
     }
-
 
     private void disposeWhenDestroy(){
         if (this.disposable != null && !this.disposable.isDisposed()) this.disposable.dispose();
@@ -136,31 +91,9 @@ public class MainFragment extends Fragment {
     // UPDATE UI
     // -------------------
 
-    private void updateUIWhenStartingHTTPRequest(){
-        this.textView.setText("Downloading...");
+    private void updateUI(MTGCardList mtgCardList){
+        mtgCards.addAll(mtgCardList.getData());
+        adapter.notifyDataSetChanged();
     }
 
-    private void updateUIWhenStopingHTTPRequest(String response){
-        this.textView.setText(response);
-    }
-
-    private void updateUIWithListOfMtgSet(MTGSetList mtgSetList){
-        StringBuilder stringBuilder = new StringBuilder();
-        for (MTGSet mtgSet : mtgSetList.getData()){
-            stringBuilder.append(" - " + mtgSet.getName() + "\n");
-        }
-        updateUIWhenStopingHTTPRequest(stringBuilder.toString());
-    }
-
-    private void updateUIWithMtgSet(MTGSet mtgSet){
-        updateUIWhenStopingHTTPRequest("Le Set est " + mtgSet.getName()+" du bloc " + mtgSet.getBlock()+".");
-    }
-
-    private void updateUIWithListOfMtgCard(MTGCardList mtgCardList){
-        StringBuilder stringBuilder = new StringBuilder();
-        for (MTGCard mtgCard : mtgCardList.getData()){
-            stringBuilder.append(" - " + mtgCard.getName() + " " + mtgCard.getManaCost() + "\n");
-        }
-        updateUIWhenStopingHTTPRequest(stringBuilder.toString());
-    }
 }
