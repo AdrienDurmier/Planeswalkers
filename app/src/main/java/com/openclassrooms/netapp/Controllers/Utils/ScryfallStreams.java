@@ -1,7 +1,7 @@
 package com.openclassrooms.netapp.Controllers.Utils;
 
-import com.openclassrooms.netapp.Controllers.Models.MTGDatum;
 import com.openclassrooms.netapp.Controllers.Models.MTGSet;
+
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -12,17 +12,17 @@ import io.reactivex.schedulers.Schedulers;
 
 public class ScryfallStreams {
 
-    public static Observable<List<MTGSet>> streamFetchSets(){
+    public static Observable<List<MTGSet>> streamFetchMTGSets(){
         ScryfallService scryfallService = ScryfallService.retrofit.create(ScryfallService.class);
-        return scryfallService.getSets()
+        return scryfallService.getMTGSets()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .timeout(10, TimeUnit.SECONDS);
     }
 
-    public static Observable<MTGDatum> streamFetchSetDatum(String code){
+    public static Observable<MTGSet> streamFetchMTGSet(String code){
         ScryfallService scryfallService = ScryfallService.retrofit.create(ScryfallService.class);
-        return scryfallService.getSetDatum(code)
+        return scryfallService.getMTGSet(code)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .timeout(10, TimeUnit.SECONDS);

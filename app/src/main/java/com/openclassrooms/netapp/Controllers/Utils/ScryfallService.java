@@ -1,6 +1,5 @@
 package com.openclassrooms.netapp.Controllers.Utils;
 
-import com.openclassrooms.netapp.Controllers.Models.MTGDatum;
 import com.openclassrooms.netapp.Controllers.Models.MTGSet;
 
 import java.util.List;
@@ -14,11 +13,22 @@ import retrofit2.http.Path;
 
 public interface ScryfallService {
 
+    /**
+     * Retourne la liste des sets
+     * @see https://scryfall.com/docs/api/sets/all
+     * @return
+     */
     @GET("sets")
-    Observable<List<MTGSet>> getSets();
+    Observable<List<MTGSet>> getMTGSets();
 
+    /**
+     * Retourne un set à partir de son code
+     * @see https://scryfall.com/docs/api/sets/code
+     * @param code
+     * @return
+     */
     @GET("/sets/{code}")
-    Observable<MTGDatum> getSetDatum(@Path("code") String code);
+    Observable<MTGSet> getMTGSet(@Path("code") String code);
 
     public static final Retrofit retrofit = new Retrofit.Builder()
             .baseUrl("https://api.scryfall.com/")
