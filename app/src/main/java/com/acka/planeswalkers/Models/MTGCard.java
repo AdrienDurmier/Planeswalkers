@@ -1,4 +1,4 @@
-package com.acka.planeswalkers.Controllers.Models;
+package com.acka.planeswalkers.Models;
 
 import java.util.List;
 import com.google.gson.annotations.Expose;

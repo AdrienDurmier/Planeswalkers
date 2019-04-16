@@ -18,6 +18,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".Controllers.Activities.MTGCardActivity"
+            android:parentActivityName="com.acka.planeswalkers.Controllers.Activities.MainActivity" >
+        </activity>
     </application>
 
 </manifest>

@@ -1,4 +1,4 @@
-package com.acka.planeswalkers.Controllers.Views;
+package com.acka.planeswalkers.Views;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -7,7 +7,7 @@ import android.widget.ImageView;
 
 import com.bumptech.glide.RequestManager;
 import com.bumptech.glide.request.RequestOptions;
-import com.acka.planeswalkers.Controllers.Models.MTGCard;
+import com.acka.planeswalkers.Models.MTGCard;
 import com.acka.planeswalkers.R;
 
 import butterknife.BindView;

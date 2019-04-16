@@ -1,9 +1,11 @@
-package com.acka.planeswalkers.Controllers.Utils;
+package com.acka.planeswalkers.Utils;
 
-import com.acka.planeswalkers.Controllers.Models.MTGCardList;
-import com.acka.planeswalkers.Controllers.Models.MTGSet;
-import com.acka.planeswalkers.Controllers.Models.MTGSetList;
+import com.acka.planeswalkers.Models.MTGCard;
+import com.acka.planeswalkers.Models.MTGCardList;
+import com.acka.planeswalkers.Models.MTGSet;
+import com.acka.planeswalkers.Models.MTGSetList;
 
+import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 
 import io.reactivex.Observable;
@@ -36,5 +38,14 @@ public class ScryfallStreams {
                 .observeOn(AndroidSchedulers.mainThread())
                 .timeout(30, TimeUnit.SECONDS);
     }
+
+    public static Observable<MTGCard> streamFetchMTGCard(String id){
+        ScryfallService scryfallService = ScryfallService.retrofit.create(ScryfallService.class);
+        return scryfallService.getMTGCard(id)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .timeout(10, TimeUnit.SECONDS);
+    }
+
 
 }

@@ -1,4 +1,4 @@
-package com.acka.planeswalkers.Controllers.Utils;
+package com.acka.planeswalkers.Utils;
 
 import android.os.AsyncTask;
 

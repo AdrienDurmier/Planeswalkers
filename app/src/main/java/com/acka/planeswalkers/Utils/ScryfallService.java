@@ -1,8 +1,11 @@
-package com.acka.planeswalkers.Controllers.Utils;
+package com.acka.planeswalkers.Utils;
 
-import com.acka.planeswalkers.Controllers.Models.MTGSet;
-import com.acka.planeswalkers.Controllers.Models.MTGSetList;
-import com.acka.planeswalkers.Controllers.Models.MTGCardList;
+import com.acka.planeswalkers.Models.MTGSetList;
+import com.acka.planeswalkers.Models.MTGSet;
+import com.acka.planeswalkers.Models.MTGCardList;
+import com.acka.planeswalkers.Models.MTGCard;
+
+import java.util.UUID;
 
 import io.reactivex.Observable;
 import retrofit2.Retrofit;
@@ -15,7 +18,7 @@ public interface ScryfallService {
 
     /**
      * Retourne la liste des sets
-     * @see https://scryfall.com/docs/api/sets/all
+     * @see "https://scryfall.com/docs/api/sets/all"
      * @return
      */
     @GET("sets")
@@ -23,7 +26,7 @@ public interface ScryfallService {
 
     /**
      * Retourne un set à partir de son code
-     * @see https://scryfall.com/docs/api/sets/code
+     * @see "https://scryfall.com/docs/api/sets/code"
      * @param code
      * @return
      */
@@ -32,11 +35,19 @@ public interface ScryfallService {
 
     /**
      * Retourne la liste des cards
-     * @see https://scryfall.com/docs/api/cards
+     * @see "https://scryfall.com/docs/api/cards"
      * @return
      */
     @GET("/cards")
     Observable<MTGCardList> getListMTGCard();
+
+    /**
+     * Retourne une carte à partir de son UUID
+     * @see "https://scryfall.com/docs/api/cards/id"
+     * @return
+     */
+    @GET("/cards/{id}")
+    Observable<MTGCard> getMTGCard(@Path("id") String id);
 
     public static final Retrofit retrofit = new Retrofit.Builder()
             .baseUrl("https://api.scryfall.com/")

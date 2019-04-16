@@ -1,11 +1,10 @@
-package com.acka.planeswalkers.Controllers.Models;
-
+package com.acka.planeswalkers.Models;
 
 import java.util.List;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class MTGSetList {
+public class MTGCardList {
 
     @SerializedName("object")
     @Expose
@@ -21,7 +20,7 @@ public class MTGSetList {
     private String nextPage;
     @SerializedName("data")
     @Expose
-    private List<MTGSet> data = null;
+    private List<MTGCard> data = null;
 
     public String getObject() {
         return object;
@@ -55,11 +54,11 @@ public class MTGSetList {
         this.nextPage = nextPage;
     }
 
-    public List<MTGSet> getData() {
+    public List<MTGCard> getData() {
         return data;
     }
 
-    public void setData(List<MTGSet> data) {
+    public void setData(List<MTGCard> data) {
         this.data = data;
     }
 
