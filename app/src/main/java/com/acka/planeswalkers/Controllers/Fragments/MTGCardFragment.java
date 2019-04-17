@@ -92,7 +92,7 @@ public class MTGCardFragment extends Fragment {
     }
 
     private void updateUi(MTGCard mtgCard){
-        ((MTGCardActivity)getActivity()).getSupportActionBar().setTitle(mtgCard.getName()); // Ajout du nom de la carte dans la toolbar
+        // ((MTGCardActivity)getActivity()).getSupportActionBar().setTitle(mtgCard.getName()); // Ajout du nom de la carte dans la toolbar
         this.mManaCost.setText(mtgCard.getManaCost());
         this.mTypeLine.setText(mtgCard.getTypeLine());
         this.mOracleText.setText(mtgCard.getOracleText());

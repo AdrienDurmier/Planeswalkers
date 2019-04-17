@@ -1,7 +1,9 @@
 package com.acka.planeswalkers.Controllers.Activities;
 
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 
 import com.acka.planeswalkers.Controllers.Fragments.MTGCardFragment;
 import com.acka.planeswalkers.R;
@@ -14,8 +16,15 @@ import com.acka.planeswalkers.R;
         protected void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
             setContentView(R.layout.activity_mtgcard);
-
+            this.configureToolbar();
             this.configureAndShowDetailFragment();
+        }
+
+        private void configureToolbar(){
+            Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+            setSupportActionBar(toolbar);
+            ActionBar ab = getSupportActionBar();
+            ab.setDisplayHomeAsUpEnabled(true);
         }
 
         // -------------------
