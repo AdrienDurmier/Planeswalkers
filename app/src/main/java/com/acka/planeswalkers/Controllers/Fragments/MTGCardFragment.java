@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.acka.planeswalkers.Controllers.Activities.MTGCardActivity;
 import com.acka.planeswalkers.Models.MTGCard;
 import com.acka.planeswalkers.Utils.ScryfallStreams;
 import com.bumptech.glide.Glide;
@@ -29,7 +30,7 @@ public class MTGCardFragment extends Fragment {
 
     // FOR DESIGN
     @BindView(R.id.fragment_mtgcard_image) ImageView mImage;
-    @BindView(R.id.fragment_mtgcard_name) TextView mName;
+    @BindView(R.id.fragment_mtgcard_mana_cost) TextView mManaCost;
     @BindView(R.id.fragment_mtgcard_type_line) TextView mTypeLine;
     @BindView(R.id.fragment_mtgcard_oracle_text) TextView mOracleText;
 
@@ -91,10 +92,11 @@ public class MTGCardFragment extends Fragment {
     }
 
     private void updateUi(MTGCard mtgCard){
-        this.mName.setText(mtgCard.getName());
+        ((MTGCardActivity)getActivity()).getSupportActionBar().setTitle(mtgCard.getName()); // Ajout du nom de la carte dans la toolbar
+        this.mManaCost.setText(mtgCard.getManaCost());
         this.mTypeLine.setText(mtgCard.getTypeLine());
         this.mOracleText.setText(mtgCard.getOracleText());
-        Glide.with(this).load(mtgCard.getImageUris().getArtCrop()).apply(RequestOptions.circleCropTransform()).into(mImage);
+        Glide.with(this).load(mtgCard.getImageUris().getArtCrop()).apply(RequestOptions.centerCropTransform()).into(mImage);
     }
 
 }

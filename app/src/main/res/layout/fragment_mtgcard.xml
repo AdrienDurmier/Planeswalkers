@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="20dip"
+    android:background="@color/colorPrimaryDark"
     tools:context=".Controllers.Fragments.MTGCardFragment">
 
     <LinearLayout
@@ -22,17 +22,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="7"
+                android:contentDescription=""
                 android:textAlignment="center"/>
 
-            <TextView
-                android:id="@+id/fragment_mtgcard_name"
-                android:layout_weight="2"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:textAlignment="center"
-                android:textStyle="bold"
-                android:textAllCaps="true"
-                android:text="name" />
         </LinearLayout>
 
         <LinearLayout
@@ -46,7 +38,23 @@
                 android:id="@+id/fragment_mtgcard_type_line"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textColor="@color/colorLight"
                 android:text="Type line" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:layout_marginTop="5dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/fragment_mtgcard_mana_cost"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorLight"
+                android:text="name" />
 
         </LinearLayout>
 
@@ -61,9 +69,131 @@
                 android:id="@+id/fragment_mtgcard_oracle_text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textColor="@color/colorLight"
+                android:padding="15dp"
                 android:text="Oracle text" />
 
         </LinearLayout>
+
+        <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="5"
+            android:stretchColumns="*"
+            android:layout_marginTop="5dp">
+
+            <TableRow
+                android:layout_width="0dp"
+                android:layout_height="fill_parent">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:background="@drawable/border"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/colorLight"
+                        android:padding="15dp"
+                        android:layout_weight="5"
+                        android:textAlignment="center"
+                        android:text="Standard"/>
+
+                    <TextView
+                        android:background="@drawable/border"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/colorLight"
+                        android:padding="15dp"
+                        android:layout_weight="5"
+                        android:textAlignment="center"
+                        android:text="Modern"/>
+
+                    <TextView
+                        android:background="@drawable/border"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/colorLight"
+                        android:padding="15dp"
+                        android:layout_weight="5"
+                        android:textAlignment="center"
+                        android:text="Legacy"/>
+
+                    <TextView
+                        android:background="@drawable/border"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/colorLight"
+                        android:padding="15dp"
+                        android:layout_weight="5"
+                        android:textAlignment="center"
+                        android:text="Vintage"/>
+
+                </LinearLayout>
+
+            </TableRow>
+
+            <TableRow
+                android:layout_width="0dp"
+                android:layout_height="fill_parent">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:layout_weight="20"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:background="@drawable/border"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/colorLight"
+                        android:padding="15dp"
+                        android:layout_weight="5"
+                        android:textAlignment="center"
+                        android:text="Commander"/>
+
+                    <TextView
+                        android:background="@drawable/border"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/colorLight"
+                        android:padding="15dp"
+                        android:layout_weight="5"
+                        android:textAlignment="center"
+                        android:text="Duel"/>
+
+                    <TextView
+                        android:background="@drawable/border"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/colorLight"
+                        android:padding="15dp"
+                        android:layout_weight="5"
+                        android:textAlignment="center"
+                        android:text="Pauper"/>
+
+                    <TextView
+                        android:background="@drawable/border"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/colorLight"
+                        android:padding="15dp"
+                        android:layout_weight="5"
+                        android:textAlignment="center"
+                        android:text="Penny"/>
+
+                </LinearLayout>
+
+            </TableRow>
+
+
+        </TableLayout>
+
 
     </LinearLayout>
 </FrameLayout>
