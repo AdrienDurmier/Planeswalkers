@@ -3,10 +3,6 @@ package com.acka.planeswalkers.Utils;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
-/**
- * Created by Philippe on 25/12/2017.
- */
-
 public class ItemClickSupport {
     private final RecyclerView mRecyclerView;
     private OnItemClickListener mOnItemClickListener;

@@ -15,9 +15,9 @@ import butterknife.ButterKnife;
 
 public class MTGCardViewHolder extends RecyclerView.ViewHolder {
 
-    @BindView(R.id.fragment_main_item_title) TextView textView;
-    @BindView(R.id.fragment_main_item_type_line) TextView textViewTypeLine;
-    @BindView(R.id.fragment_main_item_image) ImageView imageView;
+    @BindView(R.id.fragment_cards_item_title) TextView textViewTitle;
+    @BindView(R.id.fragment_cards_item_type_line) TextView textViewTypeLine;
+    @BindView(R.id.fragment_cards_item_image) ImageView imageView;
 
     public MTGCardViewHolder(View itemView) {
         super(itemView);
@@ -25,7 +25,7 @@ public class MTGCardViewHolder extends RecyclerView.ViewHolder {
     }
 
     public void updateWithMTGCard(MTGCard mtgCard, RequestManager glide){
-        this.textView.setText(mtgCard.getName());
+        this.textViewTitle.setText(mtgCard.getName());
         this.textViewTypeLine.setText(mtgCard.getTypeLine());
         glide.load(mtgCard.getImageUris().getArtCrop()).apply(RequestOptions.centerCropTransform()).into(imageView);
     }

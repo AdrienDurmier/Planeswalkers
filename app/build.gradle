@@ -3,7 +3,7 @@ apply plugin: 'com.android.application'
 android {
     compileSdkVersion 26
     defaultConfig {
-        applicationId "com.openclassrooms.netapp"
+        applicationId "com.acka.planeswalkers"
         minSdkVersion 17
         targetSdkVersion 26
         versionCode 1
@@ -42,4 +42,6 @@ dependencies {
     // Récupération d'image à partir d'url
     implementation 'com.github.bumptech.glide:glide:4.2.0'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.2.0'
+    // Design
+    implementation 'com.android.support:design:26.1.0'
 }

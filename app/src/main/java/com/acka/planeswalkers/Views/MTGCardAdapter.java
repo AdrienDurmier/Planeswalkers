@@ -34,7 +34,7 @@ public class MTGCardAdapter extends RecyclerView.Adapter<MTGCardViewHolder> {
     public MTGCardViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         Context context = parent.getContext();
         LayoutInflater inflater = LayoutInflater.from(context);
-        View view = inflater.inflate(R.layout.fragment_main_item, parent, false);
+        View view = inflater.inflate(R.layout.fragment_cards_item, parent, false);
 
         return new MTGCardViewHolder(view);
     }

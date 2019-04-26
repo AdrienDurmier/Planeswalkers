@@ -1,6 +1,5 @@
 package com.acka.planeswalkers.Controllers.Fragments;
 
-
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -28,14 +27,15 @@ import butterknife.ButterKnife;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.observers.DisposableObserver;
 
-/**
- * A simple {@link Fragment} subclass.
- */
-public class MainFragment extends Fragment implements MTGCardAdapter.Listener, ItemClickSupport.OnItemClickListener {
+public class TabCardFragment extends Fragment implements MTGCardAdapter.Listener, ItemClickSupport.OnItemClickListener {
+
+    public static TabCardFragment newInstance() {
+        return (new TabCardFragment());
+    }
 
     // FOR DESIGN
-    @BindView(R.id.fragment_main_recycler_view) RecyclerView recyclerView;
-    @BindView(R.id.fragment_main_swipe_container) SwipeRefreshLayout swipeRefreshLayout;
+    @BindView(R.id.fragment_tab_card_recycler_view) RecyclerView recyclerView;
+    @BindView(R.id.fragment_tab_card_swipe_container) SwipeRefreshLayout swipeRefreshLayout;
 
     //FOR DATA
     private Disposable disposable;
@@ -49,12 +49,11 @@ public class MainFragment extends Fragment implements MTGCardAdapter.Listener, I
         public void onItemClicked(MTGCard mtgCard);
     }
 
-    public MainFragment() { }
-
+    public TabCardFragment() { }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_main, container, false);
+        View view = inflater.inflate(R.layout.tab_card_fragment, container, false);
         ButterKnife.bind(this, view);
         this.configureRecyclerView();
         this.configureSwipeRefreshLayout();
@@ -66,8 +65,6 @@ public class MainFragment extends Fragment implements MTGCardAdapter.Listener, I
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-
-        // Call the method that creating callback after being attached to parent activity
         this.createCallbackToParentActivity();
     }
 
@@ -84,14 +81,11 @@ public class MainFragment extends Fragment implements MTGCardAdapter.Listener, I
     @Override
     public void onItemClicked(RecyclerView recyclerView, int position, View v) {
         MTGCard mtgCard = adapter.getMTGCard(position);
-
-        // Spread the click to the parent activity
         mCallback.onItemClicked(mtgCard);
     }
 
     private void configureOnClickRecyclerView(){
-        // Set onClickListener to one item (of recycler view)
-        ItemClickSupport.addTo(recyclerView, R.layout.fragment_main_item).setOnItemClickListener(this);
+        ItemClickSupport.addTo(recyclerView, R.layout.fragment_cards_item).setOnItemClickListener(this);
     }
 
     @Override
@@ -156,11 +150,9 @@ public class MainFragment extends Fragment implements MTGCardAdapter.Listener, I
 
     private void createCallbackToParentActivity(){
         try {
-            //Parent activity will automatically subscribe to callback
             mCallback = (MyItemClickListener) getActivity();
         } catch (ClassCastException e) {
             throw new ClassCastException(e.toString()+ " must implement OnButtonClickedListener");
         }
     }
-
 }
