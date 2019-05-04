@@ -1,21 +1,21 @@
 package com.acka.planeswalkers.Controllers.Activities;
 
+import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 
-import com.acka.planeswalkers.Controllers.Fragments.MTGCardFragment;
+import com.acka.planeswalkers.Controllers.Fragments.MTGSetFragment;
 import com.acka.planeswalkers.R;
 
-public class MTGCardActivity extends AppCompatActivity {
+public class MTGSetActivity extends AppCompatActivity {
 
-    private MTGCardFragment cardFragment;
+    private MTGSetFragment setFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_mtgcard);
+        setContentView(R.layout.activity_mtgset);
         this.configureToolbar();
         this.configureAndShowDetailFragment();
     }
@@ -33,12 +33,12 @@ public class MTGCardActivity extends AppCompatActivity {
 
     private void configureAndShowDetailFragment(){
 
-        cardFragment = (MTGCardFragment) getSupportFragmentManager().findFragmentById(R.id.activity_mtgcard_frame_layout);
+        setFragment = (MTGSetFragment) getSupportFragmentManager().findFragmentById(R.id.activity_mtgset_frame_layout);
 
-        if (cardFragment == null) {
-            cardFragment = new MTGCardFragment();
+        if (setFragment == null) {
+            setFragment = new MTGSetFragment();
             getSupportFragmentManager().beginTransaction()
-                    .add(R.id.activity_mtgcard_frame_layout, cardFragment)
+                    .add(R.id.activity_mtgset_frame_layout, setFragment)
                     .commit();
         }
     }

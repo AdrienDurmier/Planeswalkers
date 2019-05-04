@@ -12,10 +12,12 @@ import android.widget.Toast;
 
 import com.acka.planeswalkers.Adapters.PageAdapter;
 import com.acka.planeswalkers.Controllers.Fragments.TabCardFragment;
+import com.acka.planeswalkers.Controllers.Fragments.TabSetFragment;
 import com.acka.planeswalkers.Models.MTGCard;
+import com.acka.planeswalkers.Models.MTGSet;
 import com.acka.planeswalkers.R;
 
-public class MainActivity extends AppCompatActivity implements TabCardFragment.MyItemClickListener {
+public class MainActivity extends AppCompatActivity implements TabCardFragment.MyItemClickListener, TabSetFragment.MyItemClickListener {
 
     private TabCardFragment tabCardFragment;
 
@@ -24,7 +26,6 @@ public class MainActivity extends AppCompatActivity implements TabCardFragment.M
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         this.configureToolbar();
-        //this.configureAndShowMainFragment();
         this.configureViewPagerAndTabs();
     }
 
@@ -35,9 +36,7 @@ public class MainActivity extends AppCompatActivity implements TabCardFragment.M
     }
 
     private void configureToolbar(){
-        // Get the toolbar view inside the activity layout
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        // Sets the Toolbar
         setSupportActionBar(toolbar);
     }
 
@@ -59,24 +58,19 @@ public class MainActivity extends AppCompatActivity implements TabCardFragment.M
     // CONFIGURATION
     // -------------------
 
-    /*private void configureAndShowMainFragment(){
-
-        mainFragment = (MainFragment) getSupportFragmentManager().findFragmentById(R.id.activity_main_frame_layout);
-
-        if (mainFragment == null) {
-            mainFragment = new MainFragment();
-            getSupportFragmentManager().beginTransaction()
-                    .add(R.id.activity_main_frame_layout, mainFragment)
-                    .commit();
-        }
-    }*/
-
     private void configureViewPagerAndTabs(){
         ViewPager pager = (ViewPager)findViewById(R.id.activity_main_viewpager);
         pager.setAdapter(new PageAdapter(getSupportFragmentManager()));
         TabLayout tabs= (TabLayout)findViewById(R.id.activity_main_tabs);
         tabs.setupWithViewPager(pager);
         tabs.setTabMode(TabLayout.MODE_SCROLLABLE);
+    }
+    /**
+     * Lors du clic sur un set
+     */
+    @Override
+    public void onItemClicked(MTGSet mtgSet) {
+        startActivity(new Intent(this, MTGSetActivity.class).putExtra("code", mtgSet.getId()));
     }
 
     /**
@@ -86,4 +80,5 @@ public class MainActivity extends AppCompatActivity implements TabCardFragment.M
     public void onItemClicked(MTGCard mtgCard) {
         startActivity(new Intent(this, MTGCardActivity.class).putExtra("uuid", mtgCard.getId()));
     }
+
 }
