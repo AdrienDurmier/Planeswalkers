@@ -7,14 +7,12 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.acka.planeswalkers.Controllers.Activities.MTGSetActivity;
 import com.acka.planeswalkers.Models.MTGSet;
 import com.acka.planeswalkers.R;
 import com.acka.planeswalkers.Utils.ScryfallStreams;
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.RequestOptions;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -26,7 +24,8 @@ public class MTGSetFragment extends Fragment {
     private static final String TAG = "SetFragment";
 
     // FOR DESIGN
-    @BindView(R.id.fragment_mtgset_icon) ImageView mIcon;
+    @BindView(R.id.fragment_mtgset_card_count) TextView mCardCount;
+    @BindView(R.id.fragment_mtgset_released_at) TextView mReleasedAt;
     @BindView(R.id.fragment_mtgset_block) TextView mBlock;
 
     //FOR DATA
@@ -44,8 +43,8 @@ public class MTGSetFragment extends Fragment {
         Intent intent = getActivity().getIntent();
         Bundle bundle = intent.getExtras();
         if(bundle != null){
-            String id = bundle.getString("uuid");
-            this.executeHttpRequestWithRetrofit(id);
+            String code = bundle.getString("code");
+            this.executeHttpRequestWithRetrofit(code);
         }
 
         return view;
@@ -87,9 +86,10 @@ public class MTGSetFragment extends Fragment {
     }
 
     private void updateUi(MTGSet mtgSet){
-        // ((MTGSetActivity)getActivity()).getSupportActionBar().setTitle(mtgSet.getName()); // Ajout du nom de la carte dans la toolbar
+        ((MTGSetActivity)getActivity()).getSupportActionBar().setTitle(mtgSet.getName());
+        this.mCardCount.setText(String.valueOf(mtgSet.getCardCount()));
+        this.mReleasedAt.setText(mtgSet.getReleasedAt());
         this.mBlock.setText(mtgSet.getBlock());
-        Glide.with(this).load(mtgSet.getIconSvgUri()).apply(RequestOptions.centerCropTransform()).into(mIcon);
     }
 
 }

@@ -41,7 +41,7 @@ public class MTGSetAdapter extends RecyclerView.Adapter<MTGSetViewHolder> {
 
     @Override
     public void onBindViewHolder(MTGSetViewHolder viewHolder, int position) {
-        viewHolder.updateWithMTGSet(this.MTGSets.get(position), this.glide);
+        viewHolder.updateWithMTGSet(this.MTGSets.get(position));
     }
 
     @Override

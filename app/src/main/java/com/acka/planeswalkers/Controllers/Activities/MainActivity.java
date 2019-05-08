@@ -65,12 +65,13 @@ public class MainActivity extends AppCompatActivity implements TabCardFragment.M
         tabs.setupWithViewPager(pager);
         tabs.setTabMode(TabLayout.MODE_SCROLLABLE);
     }
+
     /**
      * Lors du clic sur un set
      */
     @Override
     public void onItemClicked(MTGSet mtgSet) {
-        startActivity(new Intent(this, MTGSetActivity.class).putExtra("code", mtgSet.getId()));
+        startActivity(new Intent(this, MTGSetActivity.class).putExtra("code", mtgSet.getCode()));
     }
 
     /**

@@ -30,9 +30,6 @@ public class MTGCardFragment extends Fragment {
 
     // FOR DESIGN
     @BindView(R.id.fragment_mtgcard_image) ImageView mImage;
-    @BindView(R.id.fragment_mtgcard_mana_cost) TextView mManaCost;
-    @BindView(R.id.fragment_mtgcard_type_line) TextView mTypeLine;
-    @BindView(R.id.fragment_mtgcard_oracle_text) TextView mOracleText;
 
     //FOR DATA
     private Disposable disposable;
@@ -92,11 +89,8 @@ public class MTGCardFragment extends Fragment {
     }
 
     private void updateUi(MTGCard mtgCard){
-        // ((MTGCardActivity)getActivity()).getSupportActionBar().setTitle(mtgCard.getName()); // Ajout du nom de la carte dans la toolbar
-        this.mManaCost.setText(mtgCard.getManaCost());
-        this.mTypeLine.setText(mtgCard.getTypeLine());
-        this.mOracleText.setText(mtgCard.getOracleText());
-        Glide.with(this).load(mtgCard.getImageUris().getArtCrop()).apply(RequestOptions.centerCropTransform()).into(mImage);
+        ((MTGCardActivity)getActivity()).getSupportActionBar().setTitle(mtgCard.getName());
+        Glide.with(this).load(mtgCard.getImageUris().getBorderCrop()).into(mImage);
     }
 
 }

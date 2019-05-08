@@ -3,44 +3,42 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_marginTop="?attr/actionBarSize"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/colorPrimaryDark"
     tools:context=".Controllers.Fragments.MTGCardFragment">
 
-    <LinearLayout
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        android:orientation="vertical" >
 
-        <LinearLayout
+        <TextView
+            android:id="@+id/fragment_mtgset_card_count"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="7"
-            android:orientation="vertical">
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorLight"
+            android:layout_marginVertical="10dp"
+            android:text="Card count" />
 
-            <ImageView
-                android:id="@+id/fragment_mtgset_icon"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="7"
-                android:contentDescription=""
-                android:textAlignment="center"/>
-
-        </LinearLayout>
-
-        <LinearLayout
+        <TextView
+            android:id="@+id/fragment_mtgset_released_at"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:layout_marginTop="5dp"
-            android:orientation="horizontal">
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorLight"
+            android:layout_marginVertical="10dp"
+            android:text="Released at" />
 
-            <TextView
-                android:id="@+id/fragment_mtgset_block"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textColor="@color/colorLight"
-                android:text="Type line" />
-        </LinearLayout>
+        <TextView
+            android:id="@+id/fragment_mtgset_block"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorLight"
+            android:layout_marginVertical="10dp"
+            android:text="Type line" />
 
     </LinearLayout>
+
 </FrameLayout>
