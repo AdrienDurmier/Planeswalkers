@@ -86,7 +86,7 @@ public class MTGSetFragment extends Fragment {
     }
 
     private void updateUi(MTGSet mtgSet){
-        ((MTGSetActivity)getActivity()).getSupportActionBar().setTitle(mtgSet.getName());
+        ((MTGSetActivity)getActivity()).getSupportActionBar().setTitle(mtgSet.getName() + ' ' + '(' + mtgSet.getBlockCode().toUpperCase() + ')');
         this.mCardCount.setText(String.valueOf(mtgSet.getCardCount()));
         this.mReleasedAt.setText(mtgSet.getReleasedAt());
         this.mBlock.setText(mtgSet.getBlock());

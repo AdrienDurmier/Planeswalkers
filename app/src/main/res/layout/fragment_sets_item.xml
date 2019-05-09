@@ -4,7 +4,8 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="20dip">
+    android:paddingVertical="5dp"
+    android:paddingHorizontal="10dp">
 
     <LinearLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
@@ -18,7 +19,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:textSize="22sp"
+            android:textSize="18sp"
             android:textStyle="bold"/>
 
     </LinearLayout>
