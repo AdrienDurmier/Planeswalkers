@@ -3,13 +3,13 @@ package com.acka.planeswalkers.Controllers.Fragments;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.acka.planeswalkers.Controllers.Activities.MTGSetActivity;
+import com.acka.planeswalkers.Models.MTGCardList;
 import com.acka.planeswalkers.Models.MTGSet;
 import com.acka.planeswalkers.R;
 import com.acka.planeswalkers.Utils.ScryfallStreams;
@@ -60,17 +60,23 @@ public class MTGSetFragment extends Fragment {
     // HTTP (RxJAVA)
     // -------------------
 
-    private void executeHttpRequestWithRetrofit(String id){
-        this.disposable = ScryfallStreams.streamFetchMTGSet(id).subscribeWith(new DisposableObserver<MTGSet>() {
+    private void executeHttpRequestWithRetrofit(String code){
+       this.disposable = ScryfallStreams.streamFetchMTGSet(code).subscribeWith(new DisposableObserver<MTGSet>() {
             @Override
             public void onNext(MTGSet mtgSet) {
-                try{
-                    Log.i(TAG, "LOG: MTG Set name : "+ mtgSet.getName());
-                }catch (Exception e){
-                    Log.e(TAG, e.getMessage());
-                }
+                updateSetUi(mtgSet);
+            }
 
-                updateUi(mtgSet);
+            @Override
+            public void onError(Throwable e) { }
+
+            @Override
+            public void onComplete() { }
+        });
+        this.disposable = ScryfallStreams.streamFetchSearchMTGCard("set:" + code).subscribeWith(new DisposableObserver<MTGCardList>() {
+            @Override
+            public void onNext(MTGCardList mtgCardList) {
+                updateCardsUi(mtgCardList);
             }
 
             @Override
@@ -85,11 +91,19 @@ public class MTGSetFragment extends Fragment {
         if (this.disposable != null && !this.disposable.isDisposed()) this.disposable.dispose();
     }
 
-    private void updateUi(MTGSet mtgSet){
-        ((MTGSetActivity)getActivity()).getSupportActionBar().setTitle(mtgSet.getName() + ' ' + '(' + mtgSet.getBlockCode().toUpperCase() + ')');
+    private void updateSetUi(MTGSet mtgSet){
+        String toolbarTitle = mtgSet.getName();
+        if(mtgSet.getBlockCode() != null){
+            toolbarTitle += " (" + mtgSet.getBlockCode().toUpperCase() + ")";
+        }
+        ((MTGSetActivity)getActivity()).getSupportActionBar().setTitle(toolbarTitle);
         this.mCardCount.setText(String.valueOf(mtgSet.getCardCount()));
         this.mReleasedAt.setText(mtgSet.getReleasedAt());
         this.mBlock.setText(mtgSet.getBlock());
+    }
+
+    private void updateCardsUi(MTGCardList mtgCardList){
+        this.mCardCount.setText(String.valueOf(mtgCardList.getData()));
     }
 
 }

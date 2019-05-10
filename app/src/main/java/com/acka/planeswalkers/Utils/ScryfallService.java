@@ -13,6 +13,7 @@ import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.http.GET;
 import retrofit2.http.Path;
+import retrofit2.http.Query;
 
 public interface ScryfallService {
 
@@ -40,6 +41,14 @@ public interface ScryfallService {
      */
     @GET("/cards")
     Observable<MTGCardList> getListMTGCard();
+
+    /**
+     * Recherche de carte
+     * @see "https://scryfall.com/docs/api/cards/search"
+     * @return
+     */
+    @GET("/cards/search")
+    Observable<MTGCardList> getSearchMTGCard(@Query("q") String query);
 
     /**
      * Retourne une carte à partir de son UUID

@@ -39,6 +39,14 @@ public class ScryfallStreams {
                 .timeout(30, TimeUnit.SECONDS);
     }
 
+    public static Observable<MTGCardList> streamFetchSearchMTGCard(String query){
+        ScryfallService scryfallService = ScryfallService.retrofit.create(ScryfallService.class);
+        return scryfallService.getSearchMTGCard(query)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .timeout(30, TimeUnit.SECONDS);
+    }
+
     public static Observable<MTGCard> streamFetchMTGCard(String id){
         ScryfallService scryfallService = ScryfallService.retrofit.create(ScryfallService.class);
         return scryfallService.getMTGCard(id)
