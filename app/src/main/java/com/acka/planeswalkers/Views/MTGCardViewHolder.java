@@ -27,6 +27,8 @@ public class MTGCardViewHolder extends RecyclerView.ViewHolder {
     public void updateWithMTGCard(MTGCard mtgCard, RequestManager glide){
         this.textViewTitle.setText(mtgCard.getName());
         this.textViewTypeLine.setText(mtgCard.getTypeLine());
-        glide.load(mtgCard.getImageUris().getArtCrop()).apply(RequestOptions.centerCropTransform()).into(imageView);
+        if(mtgCard.getImageUris().getArtCrop() != null){
+            glide.load(mtgCard.getImageUris().getArtCrop()).apply(RequestOptions.centerCropTransform()).into(imageView);
+        }
     }
 }

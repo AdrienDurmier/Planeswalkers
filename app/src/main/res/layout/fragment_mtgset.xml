@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:layout_marginTop="?attr/actionBarSize"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@color/colorPrimaryDark"
+    android:background="@color/colorPrimary"
     tools:context=".Controllers.Fragments.MTGCardFragment">
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
