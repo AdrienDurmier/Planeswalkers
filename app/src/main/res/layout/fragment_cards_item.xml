@@ -31,6 +31,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:textColor="@color/colorLight"
                 android:textSize="18sp"
                 android:textStyle="bold"/>
 
@@ -38,6 +39,7 @@
                 android:id="@+id/fragment_cards_item_type_line"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textColor="@color/colorLight"
                 android:textStyle="italic"/>
 
         </LinearLayout>

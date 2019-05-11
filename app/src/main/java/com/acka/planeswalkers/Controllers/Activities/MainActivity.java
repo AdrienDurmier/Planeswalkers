@@ -19,8 +19,6 @@ import com.acka.planeswalkers.R;
 
 public class MainActivity extends AppCompatActivity implements TabCardFragment.MyItemClickListener, TabSetFragment.MyItemClickListener {
 
-    private TabCardFragment tabCardFragment;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

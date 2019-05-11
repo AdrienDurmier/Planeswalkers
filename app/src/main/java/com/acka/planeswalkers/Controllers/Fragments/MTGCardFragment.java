@@ -30,6 +30,19 @@ public class MTGCardFragment extends Fragment {
 
     // FOR DESIGN
     @BindView(R.id.fragment_mtgcard_image) ImageView mImage;
+    @BindView(R.id.fragment_mtgcard_prices_usd) TextView mPricesUSD;
+    @BindView(R.id.fragment_mtgcard_prices_eur) TextView mPricesEUR;
+    @BindView(R.id.fragment_mtgcard_legalities_standard) TextView mLegalitiesStandard;
+    @BindView(R.id.fragment_mtgcard_legalities_future) TextView mLegalitiesFuture;
+    @BindView(R.id.fragment_mtgcard_legalities_frontier) TextView mLegalitiesFrontier;
+    @BindView(R.id.fragment_mtgcard_legalities_modern) TextView mLegalitiesModern;
+    @BindView(R.id.fragment_mtgcard_legalities_legacy) TextView mLegalitiesLegacy;
+    @BindView(R.id.fragment_mtgcard_legalities_pauper) TextView mLegalitiesPauper;
+    @BindView(R.id.fragment_mtgcard_legalities_vintage) TextView mLegalitiesVintage;
+    @BindView(R.id.fragment_mtgcard_legalities_penny) TextView mLegalitiesPenny;
+    @BindView(R.id.fragment_mtgcard_legalities_commander) TextView mLegalitiesCommander;
+    @BindView(R.id.fragment_mtgcard_legalities_duel) TextView mLegalitiesDuel;
+    @BindView(R.id.fragment_mtgcard_legalities_oldschool) TextView mLegalitiesOldschool;
 
     //FOR DATA
     private Disposable disposable;
@@ -91,6 +104,25 @@ public class MTGCardFragment extends Fragment {
     private void updateUi(MTGCard mtgCard){
         ((MTGCardActivity)getActivity()).getSupportActionBar().setTitle(mtgCard.getName());
         Glide.with(this).load(mtgCard.getImageUris().getBorderCrop()).into(mImage);
+        // Prices
+        if(mtgCard.getPrices().getUsd() != null){
+            this.mPricesUSD.setText(mtgCard.getPrices().getUsd().toString() + "$");
+        }
+        if(mtgCard.getPrices().getEur() != null){
+            this.mPricesEUR.setText(mtgCard.getPrices().getEur().toString() + "€");
+        }
+        // Legalities
+        this.mLegalitiesStandard.setText(mtgCard.getLegalities().getStandard());
+        this.mLegalitiesFuture.setText(mtgCard.getLegalities().getFuture());
+        this.mLegalitiesFrontier.setText(mtgCard.getLegalities().getFrontier());
+        this.mLegalitiesModern.setText(mtgCard.getLegalities().getModern());
+        this.mLegalitiesLegacy.setText(mtgCard.getLegalities().getLegacy());
+        this.mLegalitiesPauper.setText(mtgCard.getLegalities().getPauper());
+        this.mLegalitiesVintage.setText(mtgCard.getLegalities().getVintage());
+        this.mLegalitiesPenny.setText(mtgCard.getLegalities().getPenny());
+        this.mLegalitiesCommander.setText(mtgCard.getLegalities().getCommander());
+        this.mLegalitiesDuel.setText(mtgCard.getLegalities().getDuel());
+        this.mLegalitiesOldschool.setText(mtgCard.getLegalities().getOldschool());
     }
 
 }

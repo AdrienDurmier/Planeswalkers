@@ -7,8 +7,330 @@
     android:background="@color/colorPrimaryDark"
     tools:context=".Controllers.Fragments.MTGCardFragment">
 
-    <ImageView
-        android:id="@+id/fragment_mtgcard_image"
+    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical" >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/fragment_mtgcard_prices_usd"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/colorLight"
+                    android:layout_marginVertical="5dp"/>
+
+                <TextView
+                    android:id="@+id/fragment_mtgcard_prices_eur"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/colorLight"
+                    android:layout_marginVertical="5dp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/fragment_mtgcard_image"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/fragment_mtgcard_legalities_standard_lbl"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/colorLight"
+                    android:layout_marginVertical="5dp"
+                    android:text="Standard : " />
+
+
+                <TextView
+                    android:id="@+id/fragment_mtgcard_legalities_standard"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/colorLight"
+                    android:layout_marginVertical="5dp"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/fragment_mtgcard_legalities_future_lbl"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/colorLight"
+                    android:layout_marginVertical="5dp"
+                    android:text="Future : " />
+
+
+                <TextView
+                    android:id="@+id/fragment_mtgcard_legalities_future"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/colorLight"
+                    android:layout_marginVertical="5dp"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/fragment_mtgcard_legalities_frontier_lbl"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/colorLight"
+                    android:layout_marginVertical="5dp"
+                    android:text="Frontier : " />
+
+
+                <TextView
+                    android:id="@+id/fragment_mtgcard_legalities_frontier"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/colorLight"
+                    android:layout_marginVertical="5dp"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/fragment_mtgcard_legalities_modern_lbl"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/colorLight"
+                    android:layout_marginVertical="5dp"
+                    android:text="Modern : " />
+
+
+                <TextView
+                    android:id="@+id/fragment_mtgcard_legalities_modern"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/colorLight"
+                    android:layout_marginVertical="5dp"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/fragment_mtgcard_legalities_legacy_lbl"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/colorLight"
+                    android:layout_marginVertical="5dp"
+                    android:text="Legacy : " />
+
+
+                <TextView
+                    android:id="@+id/fragment_mtgcard_legalities_legacy"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/colorLight"
+                    android:layout_marginVertical="5dp"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/fragment_mtgcard_legalities_pauper_lbl"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/colorLight"
+                    android:layout_marginVertical="5dp"
+                    android:text="Pauper : " />
+
+
+                <TextView
+                    android:id="@+id/fragment_mtgcard_legalities_pauper"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/colorLight"
+                    android:layout_marginVertical="5dp"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/fragment_mtgcard_legalities_vintage_lbl"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/colorLight"
+                    android:layout_marginVertical="5dp"
+                    android:text="Vintage : " />
+
+
+                <TextView
+                    android:id="@+id/fragment_mtgcard_legalities_vintage"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/colorLight"
+                    android:layout_marginVertical="5dp"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/fragment_mtgcard_legalities_penny_lbl"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/colorLight"
+                    android:layout_marginVertical="5dp"
+                    android:text="Penny : " />
+
+
+                <TextView
+                    android:id="@+id/fragment_mtgcard_legalities_penny"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/colorLight"
+                    android:layout_marginVertical="5dp"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/fragment_mtgcard_legalities_commander_lbl"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/colorLight"
+                    android:layout_marginVertical="5dp"
+                    android:text="Commander : " />
+
+
+                <TextView
+                    android:id="@+id/fragment_mtgcard_legalities_commander"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/colorLight"
+                    android:layout_marginVertical="5dp"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/fragment_mtgcard_legalities_duel_lbl"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/colorLight"
+                    android:layout_marginVertical="5dp"
+                    android:text="Commander duel : " />
+
+
+                <TextView
+                    android:id="@+id/fragment_mtgcard_legalities_duel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/colorLight"
+                    android:layout_marginVertical="5dp"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/fragment_mtgcard_legalities_oldschool_lbl"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/colorLight"
+                    android:layout_marginVertical="5dp"
+                    android:text="Oldschool : " />
+
+
+                <TextView
+                    android:id="@+id/fragment_mtgcard_legalities_oldschool"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/colorLight"
+                    android:layout_marginVertical="5dp"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
+
 </FrameLayout>
