@@ -5,6 +5,7 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -30,6 +31,22 @@ public class MainActivity extends AppCompatActivity implements TabCardFragment.M
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_activity_main, menu);
+
+        // Search
+        final MenuItem searchItem = menu.findItem(R.id.menu_activity_main_search);
+        final SearchView searchView = (SearchView) searchItem.getActionView();
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                startActivity(new Intent(MainActivity.this, MTGSearchActivity.class).putExtra("query", query));
+                return false;
+            }
+            @Override
+            public boolean onQueryTextChange(String s) {
+                return false;
+            }
+        });
+
         return true;
     }
 
@@ -43,9 +60,6 @@ public class MainActivity extends AppCompatActivity implements TabCardFragment.M
         switch (item.getItemId()) {
             case R.id.menu_activity_main_params:
                 Toast.makeText(this, "todo: moteur de recherche", Toast.LENGTH_LONG).show();
-                return true;
-            case R.id.menu_activity_main_search:
-                Toast.makeText(this, "todo: recherche", Toast.LENGTH_LONG).show();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

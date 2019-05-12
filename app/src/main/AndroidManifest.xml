@@ -19,6 +19,10 @@
             </intent-filter>
         </activity>
         <activity
+            android:name=".Controllers.Activities.MTGSearchActivity"
+            android:parentActivityName="com.acka.planeswalkers.Controllers.Activities.MainActivity" >
+        </activity>
+        <activity
             android:name=".Controllers.Activities.MTGSetActivity"
             android:parentActivityName="com.acka.planeswalkers.Controllers.Activities.MainActivity" >
         </activity>
